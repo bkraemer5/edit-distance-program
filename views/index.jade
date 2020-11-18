@@ -1,0 +1,35 @@
+doctype html
+html(lang='en')
+  head
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel='stylesheet' href='./stylesheets/styles.css')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    title Edit Distance
+  body
+    .header
+      h1.title Edit Distance
+      h1.title-bottom created by Brittany Kraemer
+    .form
+      .form-group
+        form(name="input", method='post')
+          .inputs
+          b.prompt Please input two words for the edit distance:
+          p
+          .form-row
+            .col
+              label.first(for="first") The first word:
+              input.form-control.form-control-sm(size='30' maxlength='30' name='first' required='')
+            .col
+              label.second(for="second") The second word:
+              input.form-control.form-control-sm(size='30' maxlength='30' name='second' required='')
+          br
+          .buttons
+            button.btn.btn-outline-secondary(type='submit' name='submit') Submit words
+            button.btn.btn-outline-secondary(type='reset') Clear
+    .description
+      p
+        | This program calculates the edit distance between two words using dynamic programming.
+    
+

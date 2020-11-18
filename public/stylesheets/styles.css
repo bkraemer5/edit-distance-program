@@ -1,0 +1,42 @@
+.form {
+    display: inline;
+    text-align: center;
+    padding: 20px 20px;
+}
+.header {
+    display: inline;
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.form-row {
+    padding: 50px 50px;
+    border: solid;
+    border-width: 2px;
+    font-weight: 400;
+    background-color: lightsteelblue;
+}
+
+.buttons {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    margin: 20px 50px;
+}
+
+.col {
+    margin: 20px 50px;
+}
+
+.title {
+    font-weight: 100;
+}
+
+.title-bottom {
+    font-weight: 100;
+    font-size: x-large;
+}
+
+.description {
+    text-align: center;
+}
