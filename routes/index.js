@@ -8,17 +8,19 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   console.log('here');
-  var first = req.body.first;
-  var second = req.body.second;
+  var first = (req.body.first).toUpperCase();
+  var second = (req.body.second).toUpperCase();
   var matrix = editDistanceMatrix(first, second);
   printMatrix(matrix);
-  res.render('index');
+  res.render('result', { matrix: matrix , rows: matrix.length, cols: matrix[0].length });
   //res.send('success');
 });
 
 function editDistanceMatrix(first, second) {
   // first = rows, second = columns
   var matrix = [...Array(second.length+2)].map(e => Array(first.length+2).fill(0));
+
+  matrix[0][0] = ' ';
 
   for (var i = 1; i < matrix.length; i++) {
     if (i == 1) {

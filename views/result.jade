@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+  head
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel='stylesheet' href='./stylesheets/styles.css')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    title Edit Distance
+  body
+    .header
+      h1.title Edit Distance
+      h1.title-bottom created by Brittany Kraemer
+    #container
+    .description
+      p
+        | This program calculates the edit distance between two words using dynamic programming.
+    script.
+
+      const container = document.getElementById("container");
+      var matrix = "#{matrix}";
+      var rows = "#{rows}";
+      var cols = "#{cols}";
+      function drawMatrix(matrix, rows, cols) {
+        container.style.setProperty('--grid-rows', rows);
+        container.style.setProperty('--grid-cols', cols);
+            for (var i = 0; i < matrix.length; i += 2) {
+                let cell = document.createElement("div");
+                cell.innerText = matrix[i];
+                container.appendChild(cell).className = "grid-item";
+            };
+      };
+      drawMatrix(matrix, rows, cols);
