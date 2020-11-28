@@ -12,19 +12,23 @@ html(lang='en')
       h1.title Edit Distance
       h1.title-bottom created by Brittany Kraemer
     #container
-    .description
-      p
-        | This program calculates the edit distance between two words using dynamic programming.
+    .editDistance
+      h4 Edit Distance: #{editDist}
+    .alignment
+      h3 Alignment
+      p &emsp;&emsp;#{fAlign}
+      p &emsp;&emsp;#{sAlign}
     script.
 
       const container = document.getElementById("container");
       var matrix = "#{matrix}";
+      matrix = matrix.split(',');
       var rows = "#{rows}";
       var cols = "#{cols}";
       function drawMatrix(matrix, rows, cols) {
         container.style.setProperty('--grid-rows', rows);
         container.style.setProperty('--grid-cols', cols);
-            for (var i = 0; i < matrix.length; i += 2) {
+            for (var i = 0; i < matrix.length; i++) {
                 let cell = document.createElement("div");
                 cell.innerText = matrix[i];
                 container.appendChild(cell).className = "grid-item";

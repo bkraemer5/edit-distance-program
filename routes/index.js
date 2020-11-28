@@ -11,8 +11,10 @@ router.post('/', function(req, res, next) {
   var first = (req.body.first).toUpperCase();
   var second = (req.body.second).toUpperCase();
   var matrix = editDistanceMatrix(first, second);
+  alignment = getAlignment(first, second, matrix);
   printMatrix(matrix);
-  res.render('result', { matrix: matrix , rows: matrix.length, cols: matrix[0].length });
+  getAlignment(first, second, matrix);
+  res.render('result', { matrix: matrix , rows: matrix.length, cols: matrix[0].length, editDist: matrix[matrix.length-1][matrix[0].length-1], fAlign: alignment[0], sAlign: alignment[1] });
   //res.send('success');
 });
 
@@ -54,6 +56,53 @@ function editDistanceMatrix(first, second) {
   }
   return matrix;
   
+}
+
+function getAlignment(first, second, matrix) {
+  var row = matrix.length-1;
+  var col = matrix[0].length-1;
+  var alignment = ["", ""];
+  var firstIndex = first.length-1;
+  var secondIndex = second.length-1;
+  while (firstIndex >= 0 && secondIndex >= 0) {
+    // [insert, match, delete]
+    var move = [matrix[row][col-1], matrix[row-1][col-1], matrix[row-1][col]]
+    // match
+    if (move[1] <= move[0] && move[1] <= move[2]) {
+      alignment[0] = first[firstIndex].concat(alignment[0]);
+      alignment[1] = second[secondIndex].concat(alignment[1]);
+      firstIndex--;
+      secondIndex--;
+      row -= 1;
+      col -= 1;
+    }
+    // delete
+    else if (move[2] < move[1] && move[2] < move[0]) {
+      alignment[0] = "_".concat(alignment[0]);
+      alignment[1] = second[secondIndex].concat(alignment[1]);
+      secondIndex--;
+      row -=1;
+    }
+    // insert
+    else if (move[0] < move[1] && move[0] < move[2]) {
+      alignment[0] = first[firstIndex].concat(alignment[0]);
+      alignment[1] = "_".concat(alignment[1]);
+      firstIndex--;
+      col -= 1;
+    }
+  }
+  while(firstIndex >= 0) {
+    alignment[0] = first[firstIndex].concat(alignment[0]);
+    alignment[1] = "_".concat(alignment[1]);
+    firstIndex--;
+  } 
+  while(secondIndex >= 0) {
+    alignment[0] = "_".concat(alignment[0]);
+    alignment[1] = second[secondIndex].concat(alignment[1]);
+    secondIndex--;
+  }
+
+  return alignment;
 }
 
 function printMatrix(matrix) {
